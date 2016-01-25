@@ -1,0 +1,46 @@
+public int CompareLists(Node headA, Node headB)
+    {
+        Node temp=headA;
+        Node temp1=headB;
+        int flag=1;
+        int count=0;
+        int count1=0;
+        while(temp!=null)
+        {
+            count++;
+            temp=temp.next;
+        }
+        while(temp1!=null)
+        {
+            count1++;
+            temp1=temp1.next;
+        }
+        if(count!=count1){flag=0;}
+        else{temp=headA;
+            temp1=headB;
+     while(temp!=null && temp1!=null)
+     {  //System.out.println(temp.data);
+       // System.out.print(temp1.data);
+        if(temp.data==temp1.data)
+       {
+        temp=temp.next;
+        temp1=temp1.next;
+        flag=1;
+        //System.out.println("flag"+flag);
+        
+        }
+        else
+        {
+            flag=0;
+           // System.out.println("flag"+flag);
+            break;
+        }
+        
+     }}
+     //System.out.println("fin flag"+flag);
+  if(flag==1)
+      return 1;
+  else return 0;
+  
+    }
+

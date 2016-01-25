@@ -1,0 +1,204 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+ 
+
+class Node
+{
+String data;
+ Node next;
+ 
+
+    public Node()
+    {
+        next = null;
+        data = null;
+    }    
+
+    
+  
+}
+ 
+class linkedStack
+{
+Node top ;
+int size ;
+static int count=0;
+
+
+ 
+
+    public linkedStack()
+    {
+        top = null;
+        size = 0;
+        
+    }    
+ 
+    public boolean isEmpty()
+    {
+        return (top == null);
+    }    
+
+    public int getSize()
+    {
+        return size;
+    }    
+   
+    public void push(String data)
+    {
+        
+       
+        Node nen = new Node ();
+        nen.next=null;
+        nen.data=data;
+        if (top == null)
+            top = nen;
+        else
+        {
+            nen.next=top;
+            top = nen;
+        }
+        size++ ;
+    }    
+
+    public void pop()
+    {
+        if (isEmpty() )
+            throw new NoSuchElementException("Underflow Exception") ;
+         Node temp = top;
+         top = temp.next;
+         size-- ;
+        //System.out.println("popped"+temp.data);
+//       return top; 
+    }    
+    
+  
+//    public void max()
+//    {
+//       if (size == 0) 
+//        {
+//            System.out.print("Empty\n");
+//            return ;
+//        }
+//       Node temp = top;
+//       Node max=top;
+//       temp=temp.next;
+//        while (temp!= null)
+//        {
+//            if(max.data<temp.data)
+//                max=temp;
+//           
+//           temp = temp.next;
+//        }
+//        System.out.println(max.data);
+//       
+//    }
+
+    public void display()
+    {
+        System.out.print("\nStack = ");
+        if (size == 0) 
+        {
+            //System.out.print("Empty\n");
+            return ;
+        }
+        Node ptr = top;
+        while (ptr != null)
+        {
+            System.out.print(ptr.data+" ");
+            ptr = ptr.next;
+        }
+        System.out.println();        
+    }
+
+
+     
+    public void balancedparenthesis(String exp)
+   {
+       String[] arr=exp.split("");
+        linkedStack s = new linkedStack();
+         int n=arr.length;
+         int flag=0;
+        for(int i=0;i<n;i++)
+        { 
+            //System.out.println(arr[i]);
+            
+            if(arr[i].equals(")"))
+            { if(!s.isEmpty()){if(s.top.data.equals("("))
+                s.pop();else{
+            flag=1;
+            break;
+            }}
+            else{
+            flag=1;
+            break;
+            }
+            }
+            else if(arr[i].equals("]"))
+            {  if(!s.isEmpty()){ if(s.top.data.equals("["))
+                s.pop();else{
+            flag=1;
+            break;
+            }}
+            
+             else{
+            flag=1;
+            break;
+            }}
+            else if(arr[i].equals("}"))
+            {   if(!s.isEmpty()){ if(s.top.data.equals("{"))
+                s.pop();else{
+            flag=1;
+            break;
+            }}
+             else{
+            flag=1;
+            break;
+            }
+            }
+            
+            else if(arr[i].equals("(") || arr[i].equals("[") ||arr[i].equals("{"))
+            s.push(arr[i]);    
+           // s.display();
+        }
+      if(flag==1)
+          System.out.println("NO");
+      else if(!s.isEmpty())
+          System.out.println("NO");
+      else if(flag==0 && s.isEmpty())
+          System.out.println("YES");
+   }
+
+
+}
+
+
+    
+   
+public class Solution {
+
+    public static void main(String[] args) throws IOException
+    {
+      
+            
+       
+       InputStreamReader in=new InputStreamReader(System.in);
+           BufferedReader in1=new BufferedReader(in);
+           int N=Integer.parseInt(in1.readLine());
+           linkedStack ls = new linkedStack(); 
+         for(int i=0;i<N;i++)
+             {
+
+               String exp=in1.readLine();
+               ls.balancedparenthesis(exp);
+           
+    }
+}
+}

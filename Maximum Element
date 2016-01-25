@@ -1,0 +1,181 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+ 
+
+class Node
+{
+ int data;
+ Node next;
+ 
+
+    public Node()
+    {
+        next = null;
+        data = 0;
+    }    
+
+    
+  
+}
+ 
+class linkedStack
+{
+Node top ;
+int size ;
+
+
+ 
+
+    public linkedStack()
+    {
+        top = null;
+        size = 0;
+        
+    }    
+ 
+    public boolean isEmpty()
+    {
+        return (top == null);
+    }    
+
+    public int getSize()
+    {
+        return size;
+    }    
+   
+    public void push(int data)
+    {
+        
+       
+        Node nen = new Node ();
+        nen.next=null;
+        nen.data=data;
+        if (top == null)
+            top = nen;
+        else
+        {
+            nen.next=top;
+            top = nen;
+        }
+        size++ ;
+    }    
+
+    public int pop()
+    {
+        if (isEmpty() )
+            throw new NoSuchElementException("Underflow Exception") ;
+         Node temp = top;
+         top = temp.next;
+         size-- ;
+        return temp.data;
+    }    
+    
+    public int peek()
+    {
+        if (isEmpty() )
+            throw new NoSuchElementException("Underflow Exception") ;
+        return top.data;
+    }  
+    public void max()
+    {
+       if (size == 0) 
+        {
+            System.out.print("Empty\n");
+            return ;
+        }
+       Node temp = top;
+       Node max=top;
+       temp=temp.next;
+        while (temp!= null)
+        {
+            if(max.data<temp.data)
+                max=temp;
+           
+           temp = temp.next;
+        }
+        System.out.println(max.data);
+       
+    }
+
+    public void display()
+    {
+        System.out.print("\nStack = ");
+        if (size == 0) 
+        {
+            System.out.print("Empty\n");
+            return ;
+        }
+        Node ptr = top;
+        while (ptr != null)
+        {
+            System.out.print(ptr.data+" ");
+            ptr = ptr.next;
+        }
+        System.out.println();        
+    }
+}
+ 
+public class Solution {
+
+     public static void main(String[] args) throws IOException
+    {
+        try{
+            
+       InputStreamReader in=new InputStreamReader(System.in);
+           BufferedReader in1=new BufferedReader(in);
+           int N=Integer.parseInt(in1.readLine());
+           linkedStack ls = new linkedStack(); 
+            linkedStack aux = new linkedStack(); 
+            
+           for(int i=0;i<N;i++)
+           {
+               String prob=in1.readLine();
+               String[] parts=prob.split(" ");
+//               int type=Integer.parseInt(parts[0]);
+//               int data=Integer.parseInt(parts[1]);
+           
+           int type=Integer.parseInt(parts[0]);
+         
+           if(type==1)
+       {
+           int data=Integer.parseInt(parts[1]);
+           ls.push(data);
+           if(aux.isEmpty())
+           { aux.push( data ); 
+            }
+           else{
+               if(data>aux.top.data)
+                   aux.push(data);
+               else
+               aux.push(aux.top.data);
+               }
+               
+               }
+                    
+           else  if(type==2)
+       {
+           ls.pop();
+           aux.pop();
+       }
+           else  if(type==3)
+       {
+           System.out.println(aux.top.data);
+       }
+//                System.out.println("Enter integer element to push");
+//                ls.push( 10 ); 
+//                ls.push( 20 ); 
+//                ls.push( 30 ); 
+//                System.out.println(ls.pop());
+//                System.out.println(ls.peek());
+//                System.out.println(ls.isEmpty());
+//                System.out.println(ls.getSize()); 
+//                ls.display();
+                         
+                        
+    }
+        }catch(IOException e){}
+}
+}
